@@ -1,0 +1,129 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Logical page key, drives nav highlighting: "home" | "about" | "post" */
+  path?: "home" | "about" | "post";
+}
+
+const { title, description = "", path = "home" } = Astro.props;
+
+// Base-aware link helper (works under the GitHub Pages "/blog" base path).
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (p: string) => `${BASE}/${p}`.replace(/\/+$/, "/") || "/";
+
+const nav = [
+  { key: "home", label: "HOME", url: href("") },
+  { key: "about", label: "ABOUT", url: href("about/") },
+];
+
+// Customize these two lines to make the blog yours.
+const SITE_NAME = "Strawberry Field";
+const TAGLINE = "a little corner of the web ／ notes, pictures, and small things";
+
+const favicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='13' font-size='13'%3E%F0%9F%8D%93%3C/text%3E%3C/svg%3E";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href={favicon} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Apply saved theme before paint to avoid a flash of the default palette.
+      try {
+        var t = localStorage.getItem("blog-theme");
+        if (t) document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div class="wrap" id="top">
+      <header class="banner">
+        <h1 class="site-name">
+          <a href={href("")}>{SITE_NAME} <span class="heart">♡</span></a>
+        </h1>
+        <p class="tagline">{TAGLINE}</p>
+        <nav class="topnav" aria-label="Main menu">
+          {
+            nav.map((item) => (
+              <a
+                href={item.url}
+                aria-current={path === item.key ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <label class="theme-switch"
+            >Theme
+            <select id="theme-pick" aria-label="Choose a color theme">
+              <option value="">🍓 default</option>
+              <option value="ocean">≋ ocean</option>
+              <option value="brilliant-green">■ brilliant green</option>
+              <option value="judy-and-mary">★ pop</option>
+            </select>
+          </label>
+        </nav>
+      </header>
+
+      <div class="grid">
+        <main>
+          <slot />
+        </main>
+
+        <aside class="side" aria-label="Sidebar">
+          <nav class="side-box" aria-label="Menu">
+            <p class="box-head">MENU</p>
+            <ul class="menu">
+              {
+                nav.map((item) => (
+                  <li>
+                    <a
+                      href={item.url}
+                      aria-current={path === item.key ? "page" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </aside>
+      </div>
+
+      <footer class="foot">
+        <a class="totop" href="#top">▲ back to top</a>
+        <span class="copy">© {new Date().getFullYear()} {SITE_NAME}</span>
+        <span class="copy">Made with ♡ and Astro.</span>
+      </footer>
+    </div>
+
+    <script is:inline>
+      // Theme switcher: sync the <select> and persist changes.
+      (function () {
+        var sel = document.getElementById("theme-pick");
+        if (!sel) return;
+        sel.value = document.documentElement.dataset.theme || "";
+        sel.addEventListener("change", function () {
+          var v = sel.value;
+          if (v) document.documentElement.dataset.theme = v;
+          else document.documentElement.removeAttribute("data-theme");
+          try {
+            v
+              ? localStorage.setItem("blog-theme", v)
+              : localStorage.removeItem("blog-theme");
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </body>
+</html>

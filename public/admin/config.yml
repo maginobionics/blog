@@ -40,3 +40,8 @@ collections:
       - { name: image, label: Cover image, widget: image, required: false }
       - { name: imageAlt, label: Image alt text, widget: string, required: false, default: '' }
       - { name: body, label: Body, widget: markdown }
+      - name: gallery
+        label: Photos
+        widget: list
+        required: false
+        field: { name: image, label: Image, widget: image }

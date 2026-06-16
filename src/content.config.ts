@@ -10,6 +10,7 @@ const blog = defineCollection({
       description: z.string().optional(), // short text / excerpt for the feed
       image: image().optional(), // optimized via astro:assets
       imageAlt: z.string().default(""),
+      gallery: z.array(image()).optional(), // extra photos, optimized via astro:assets
     }),
 });
 

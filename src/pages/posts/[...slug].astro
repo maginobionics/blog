@@ -36,6 +36,17 @@ const fmt = (d: Date) =>
         )
       }
       <Content />
+      {
+        post.data.gallery && post.data.gallery.length > 0 && (
+          <div class="gallery">
+            {post.data.gallery.map((img) => (
+              <a href={img.src} target="_blank" rel="noopener">
+                <Image class="thumb" src={img} alt="" loading="lazy" />
+              </a>
+            ))}
+          </div>
+        )
+      }
     </article>
   </section>
 </BaseLayout>

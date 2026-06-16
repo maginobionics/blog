@@ -25,12 +25,14 @@ const fmt = (d: Date) =>
       <p class="mood">{fmt(post.data.date)}</p>
       {
         post.data.image && (
-          <Image
-            class="thumb"
-            src={post.data.image}
-            alt={post.data.imageAlt}
-            loading="lazy"
-          />
+          <a href={post.data.image.src} target="_blank" rel="noopener">
+            <Image
+              class="thumb"
+              src={post.data.image}
+              alt={post.data.imageAlt}
+              loading="lazy"
+            />
+          </a>
         )
       }
       <Content />

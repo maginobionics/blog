@@ -37,10 +37,15 @@ const favicon =
     <link rel="icon" href={favicon} />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
-      // Apply saved theme before paint to avoid a flash of the default palette.
+      // Apply theme before paint to avoid a flash of the default palette.
+      // No saved choice + OS prefers dark → auto-pick the ocean dark variant.
       try {
         var t = localStorage.getItem("blog-theme");
-        if (t) document.documentElement.dataset.theme = t;
+        if (!t && window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          t = "ocean-dark";
+        }
+        document.documentElement.dataset.theme = t || "ocean";
       } catch (e) {}
     </script>
   </head>
@@ -65,9 +70,16 @@ const favicon =
           <label class="theme-switch"
             >Theme
             <select id="theme-pick" aria-label="Choose a color theme">
-              <option value="">≋ ocean</option>
-              <option value="brilliant-green">■ brilliant green</option>
-              <option value="judy-and-mary">★ pop</option>
+              <optgroup label="light">
+                <option value="ocean">≋ ocean</option>
+                <option value="brilliant-green">■ brilliant green</option>
+                <option value="judy-and-mary">★ pop</option>
+              </optgroup>
+              <optgroup label="dark">
+                <option value="ocean-dark">≋ ocean dark</option>
+                <option value="brilliant-green-dark">■ brilliant green dark</option>
+                <option value="judy-and-mary-dark">★ pop dark</option>
+              </optgroup>
             </select>
           </label>
         </nav>
@@ -111,15 +123,12 @@ const favicon =
       (function () {
         var sel = document.getElementById("theme-pick");
         if (!sel) return;
-        sel.value = document.documentElement.dataset.theme || "";
+        sel.value = document.documentElement.dataset.theme || "ocean";
         sel.addEventListener("change", function () {
           var v = sel.value;
-          if (v) document.documentElement.dataset.theme = v;
-          else document.documentElement.removeAttribute("data-theme");
+          document.documentElement.dataset.theme = v;
           try {
-            v
-              ? localStorage.setItem("blog-theme", v)
-              : localStorage.removeItem("blog-theme");
+            localStorage.setItem("blog-theme", v);
           } catch (e) {}
         });
       })();

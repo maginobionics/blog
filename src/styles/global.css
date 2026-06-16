@@ -448,14 +448,14 @@ dl.profile dd { margin: 0; }
   --radius-sm:  3px;
   --shadow:     0 1px 0 rgba(45,120,85,.08), 0 3px 10px rgba(45,120,85,.07);
 }
-[data-theme="brilliant-green"] .card { border-color: var(--line); }
-[data-theme="brilliant-green"] .sec-head { border-bottom-style: solid; border-bottom-width: 1px; }
-[data-theme="brilliant-green"] .news dd,
-[data-theme="brilliant-green"] .disco .row,
-[data-theme="brilliant-green"] dl.profile div { border-bottom-style: solid; }
-[data-theme="brilliant-green"] .topnav a,
-[data-theme="brilliant-green"] .member { border-style: solid; }
-[data-theme="brilliant-green"] .entry .date-head::before { content: "■ "; font-size: .7em; vertical-align: 2px; }
+[data-theme^="brilliant-green"] .card { border-color: var(--line); }
+[data-theme^="brilliant-green"] .sec-head { border-bottom-style: solid; border-bottom-width: 1px; }
+[data-theme^="brilliant-green"] .news dd,
+[data-theme^="brilliant-green"] .disco .row,
+[data-theme^="brilliant-green"] dl.profile div { border-bottom-style: solid; }
+[data-theme^="brilliant-green"] .topnav a,
+[data-theme^="brilliant-green"] .member { border-style: solid; }
+[data-theme^="brilliant-green"] .entry .date-head::before { content: "■ "; font-size: .7em; vertical-align: 2px; }
 
 /* THEME: judy-and-mary  ★  (pop explosion — bright primaries) */
 [data-theme="judy-and-mary"] {
@@ -489,9 +489,112 @@ dl.profile dd { margin: 0; }
   --radius-sm:  9px;
   --shadow:     0 3px 0 rgba(255,90,135,.25), 0 6px 16px rgba(61,180,224,.18);
 }
-[data-theme="judy-and-mary"] .card { border-width: 2px; border-style: solid; border-color: var(--pink); }
-[data-theme="judy-and-mary"] .side-box { border-width: 2px; border-style: solid; border-color: var(--lavender); }
-[data-theme="judy-and-mary"] .topnav a { border-width: 2px; border-style: solid; }
-[data-theme="judy-and-mary"] .sec-head { border-bottom-style: solid; border-bottom-width: 3px; border-color: var(--mint); }
-[data-theme="judy-and-mary"] .member { border-width: 2px; border-color: var(--lavender); }
-[data-theme="judy-and-mary"] .entry .date-head::before { content: "★ "; }
+[data-theme^="judy-and-mary"] .card { border-width: 2px; border-style: solid; border-color: var(--pink); }
+[data-theme^="judy-and-mary"] .side-box { border-width: 2px; border-style: solid; border-color: var(--lavender); }
+[data-theme^="judy-and-mary"] .topnav a { border-width: 2px; border-style: solid; }
+[data-theme^="judy-and-mary"] .sec-head { border-bottom-style: solid; border-bottom-width: 3px; border-color: var(--mint); }
+[data-theme^="judy-and-mary"] .member { border-width: 2px; border-color: var(--lavender); }
+[data-theme^="judy-and-mary"] .entry .date-head::before { content: "★ "; }
+
+/* ====================================================================
+   DARK VARIANTS — same accent hues, inverted surfaces. Structural
+   flourishes are shared with their light twins via [data-theme^="…"].
+   "ocean-dark" doubles as the auto pick under prefers-color-scheme:dark.
+   ==================================================================== */
+
+/* THEME: ocean-dark  ≋  (deep sea — navy / sky blue) */
+[data-theme="ocean-dark"] {
+  --cream:      #0e1b22;
+  --paper:      #15262f;
+  --ink:        #d7e8ef;
+  --ink-soft:   #87a4b1;
+  --pink:       #3aa3d8;
+  --pink-deep:  #74c4ec;
+  --lavender:   #5ec6c0;
+  --lavender-d: #7fd4cd;
+  --mint:       #1d4350;
+  --lemon:      #20323d;
+  --line:       #294c5a;
+  --link:       #74c4ec;
+  --link-visit: #9bb9c6;
+
+  --on-accent:    #fff;
+  --banner-grad:  linear-gradient(180deg, #1f6184 0%, #134860 55%, #0c3142 100%);
+  --soft-bg:      #16262e;
+  --member-grad:  linear-gradient(180deg, #17282f 0%, #122229 100%);
+  --menu-grad:    linear-gradient(90deg, #17282f, #122831);
+  --marquee-bg:   #1a2a20;
+  --marquee-border:#33543f;
+  --marquee-ink:  #c9b98a;
+  --wallpaper:    radial-gradient(circle at 50% 120%, rgba(94,198,192,.10) 0 2px, transparent 3px);
+  --wallpaper-size: 24px 14px;
+  --marker:       "≋";
+
+  --shadow:     0 2px 0 rgba(0,0,0,.3), 0 8px 20px rgba(0,0,0,.4);
+}
+
+/* THEME: brilliant-green-dark  ■  (forest terminal — black / emerald) */
+[data-theme="brilliant-green-dark"] {
+  --cream:      #0d1512;
+  --paper:      #14201b;
+  --ink:        #d5e7dd;
+  --ink-soft:   #7f988b;
+  --pink:       #2faa6f;
+  --pink-deep:  #46c98a;
+  --lavender:   #3aa0a8;
+  --lavender-d: #5cc6b0;
+  --mint:       #1c4034;
+  --lemon:      #16261d;
+  --line:       #244236;
+  --link:       #46c98a;
+  --link-visit: #5aa79e;
+
+  --on-accent:    #fff;
+  --banner-grad:  linear-gradient(135deg, #1f8a57 0%, #1d6f74 100%);
+  --soft-bg:      #14201b;
+  --member-grad:  linear-gradient(180deg, #15221c 0%, #101b16 100%);
+  --menu-grad:    linear-gradient(90deg, #15221c, #102019);
+  --marquee-bg:   #14241a;
+  --marquee-border:#235038;
+  --marquee-ink:  #7fc89e;
+  --wallpaper:    none;
+  --wallpaper-size: auto;
+  --marker:       "■";
+
+  --radius:     4px;
+  --radius-sm:  3px;
+  --shadow:     0 1px 0 rgba(0,0,0,.3), 0 3px 10px rgba(0,0,0,.4);
+}
+
+/* THEME: judy-and-mary-dark  ★  (neon night — violet / hot pink) */
+[data-theme="judy-and-mary-dark"] {
+  --cream:      #1a1326;
+  --paper:      #221a33;
+  --ink:        #ece8f5;
+  --ink-soft:   #9b95b5;
+  --pink:       #ff5a87;
+  --pink-deep:  #ff85a8;
+  --lavender:   #3db4e0;
+  --lavender-d: #6fcdee;
+  --mint:       #ffd23f;
+  --lemon:      #2e2440;
+  --line:       #3d2f57;
+  --link:       #ff85a8;
+  --link-visit: #6fcdee;
+
+  --on-accent:    #fff;
+  --banner-grad:  linear-gradient(120deg, #ff5a87 0%, #b95fae 45%, #3db4e0 100%);
+  --soft-bg:      #241b36;
+  --member-grad:  linear-gradient(180deg, #221a33 0%, #1c1530 100%);
+  --menu-grad:    linear-gradient(90deg, #221a33, #251b3a);
+  --marquee-bg:   #2e2440;
+  --marquee-border:#ffd23f;
+  --marquee-ink:  #ffd23f;
+  --wallpaper:    radial-gradient(#3d2f57 2px, transparent 2.6px);
+  --wallpaper-size: 22px 22px;
+  --marker:       "★";
+
+  --radius:     14px;
+  --radius-sm:  9px;
+  --shadow:     0 3px 0 rgba(0,0,0,.35), 0 6px 16px rgba(0,0,0,.4);
+}

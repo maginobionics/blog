@@ -1,0 +1,42 @@
+backend:
+  name: github
+  repo: maginobionics/blog
+  branch: main
+  base_url: https://sveltia-cms-auth.patient-thunder-537f.workers.dev
+
+# Local testing: no proxy needed. In a Chromium browser open /admin/ and click
+# "Work with Local Repository" (File System Access API). local_backend is ignored by Sveltia.
+
+# Global fallback (required even though the blog collection overrides it below).
+media_folder: src/content/blog
+public_folder: /
+
+# CRITICAL — EXIF strip + downscale happen here, in-browser, before commit.
+# Raster uploads are converted to WebP, which drops EXIF/GPS metadata.
+media_libraries:
+  default:
+    config:
+      slugify_filename: true   # strip spaces/odd chars from upload filenames
+      transformations:
+        raster_image:
+          format: webp
+          quality: 80
+          width: 2000
+          height: 2000   # cap longest side; aspect ratio preserved
+
+collections:
+  - name: blog
+    label: Posts
+    folder: src/content/blog
+    path: '{{slug}}/index'   # -> src/content/blog/<slug>/index.md (folder-per-post)
+    create: true
+    slug: '{{slug}}'
+    media_folder: ''         # co-locate uploads in the entry's own folder
+    public_folder: ''        # store a relative path in frontmatter
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: image, label: Cover image, widget: image, required: false }
+      - { name: imageAlt, label: Image alt text, widget: string, required: false, default: '' }
+      - { name: body, label: Body, widget: markdown }

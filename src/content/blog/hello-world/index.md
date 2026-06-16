@@ -3,7 +3,7 @@ title: Hello, world
 date: 2026-06-15
 description: First post on the new site — a quick note about why it exists and what to expect.
 image: ./cover.svg
-imageAlt: Pink-to-lavender gradient with a strawberry
+imageAlt: Blue gradient with a wave
 ---
 
 Welcome to the new place. This is a small, hand-made blog: short posts, the

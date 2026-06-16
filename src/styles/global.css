@@ -1,48 +1,47 @@
 @charset "utf-8";
 /* ============================================================
-   Blog theme — ported from the "Strawberry Field" retsite.
-   Structure + components live here, fully tokenized. The :root
-   defaults below are the pastel "strawberry" look (the implicit
+   Blog theme — retsite-style, fully tokenized. The :root
+   defaults below are the breezy "ocean" look (the implicit
    default). Alternate palettes are scoped under [data-theme="…"]
    blocks at the bottom and switched via the topnav <select>.
    ============================================================ */
 
-/* ---- Design tokens (defaults = strawberry) ------------------------- */
+/* ---- Design tokens (defaults = ocean) ------------------------------ */
 :root {
   /* palette */
-  --cream:      #fff8f3;   /* page bg */
+  --cream:      #eef7fb;   /* page bg */
   --paper:      #ffffff;   /* card / content bg */
-  --ink:        #4a4047;   /* body text (soft dark, not pure black) */
-  --ink-soft:   #8a7f86;   /* meta / muted text */
-  --pink:       #ff9ec0;   /* primary pastel pink */
-  --pink-deep:  #f06aa0;   /* pink for emphasis / links hover */
-  --lavender:   #b8a9e0;   /* cooler accent — the rock edge */
-  --lavender-d: #7d6cb0;   /* deep lavender for headings */
-  --mint:       #a8e0d0;   /* tertiary accent */
-  --lemon:      #fff0a8;   /* highlight / marquee bg */
-  --line:       #f3cdda;   /* hairline borders */
-  --link:       #d8568f;
-  --link-visit: #a87fc8;
+  --ink:        #2c4a55;   /* body text (soft dark, not pure black) */
+  --ink-soft:   #7a96a1;   /* meta / muted text */
+  --pink:       #3aa3d8;   /* primary accent (sky blue) */
+  --pink-deep:  #1f7fb8;   /* accent for emphasis / links hover */
+  --lavender:   #5ec6c0;   /* cooler accent — sea green */
+  --lavender-d: #2a7fa0;   /* deep blue for headings */
+  --mint:       #bfe9e3;   /* tertiary accent */
+  --lemon:      #fdeecb;   /* highlight / marquee bg */
+  --line:       #c7e3ee;   /* hairline borders */
+  --link:       #1f7fb8;
+  --link-visit: #5a9ab0;
 
   /* component colors (themeable) */
   --on-accent:    #fff;                                                /* text on accent fills */
-  --banner-grad:  linear-gradient(135deg, var(--pink) 0%, var(--lavender) 100%);
-  --soft-bg:      #faf5fb;                                             /* comment / panel bg */
-  --member-grad:  linear-gradient(180deg, #fff 0%, #fdf4fa 100%);
-  --menu-grad:    linear-gradient(90deg, #fff, #fff6fb);
-  --marquee-bg:   var(--lemon);
-  --marquee-border:#e9d77a;
-  --marquee-ink:  #7a6a2a;
-  --wallpaper:    radial-gradient(var(--line) 1px, transparent 1.4px);
-  --wallpaper-size: 16px 16px;
-  --marker:       "❖";     /* section-heading marker glyph */
+  --banner-grad:  linear-gradient(180deg, #8fd3f0 0%, #3aa3d8 55%, #1f7fb8 100%);
+  --soft-bg:      #f4f1e4;                                             /* comment / panel bg */
+  --member-grad:  linear-gradient(180deg, #fff 0%, #f3f9e9 100%);
+  --menu-grad:    linear-gradient(90deg, #fff, #eef8fb);
+  --marquee-bg:   #fbf2d6;
+  --marquee-border:#ecd8a6;
+  --marquee-ink:  #94762f;
+  --wallpaper:    radial-gradient(circle at 50% 120%, rgba(94,198,192,.22) 0 2px, transparent 3px);
+  --wallpaper-size: 24px 14px;
+  --marker:       "≋";     /* section-heading marker glyph */
 
   /* shape & rhythm */
   --col:        980px;     /* max overall width */
-  --radius:     10px;
-  --radius-sm:  6px;
+  --radius:     12px;
+  --radius-sm:  8px;
   --gap:        16px;
-  --shadow:     0 2px 0 rgba(189,151,170,.18), 0 6px 18px rgba(189,151,170,.14);
+  --shadow:     0 2px 0 rgba(58,163,216,.14), 0 8px 20px rgba(58,163,216,.16);
 
   /* type */
   --font: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
@@ -105,11 +104,10 @@ a:visited { color: var(--link-visit); }
   font-family: var(--font-display);
   font-size: 30px;
   letter-spacing: .04em;
-  text-shadow: 1px 1px 0 rgba(125,108,176,.45);
+  text-shadow: 0 1px 0 rgba(31,127,184,.5);
 }
 .banner .site-name a { color: inherit; }
 .banner .site-name a:hover { text-decoration: none; }
-.banner .site-name .heart { font-size: .8em; }
 .banner .tagline {
   margin: 4px 0 0;
   font-size: 12px;
@@ -336,7 +334,7 @@ dl.profile dd { margin: 0; }
   color: var(--lavender-d);
   margin: 0 0 2px;
 }
-.entry .date-head::before { content: "🍓 "; }
+.entry .date-head::before { content: "≋ "; color: var(--lavender); }
 .entry .date-head a { color: inherit; }
 .entry .mood {
   font-size: 11px;
@@ -417,42 +415,6 @@ dl.profile dd { margin: 0; }
    ALTERNATE THEMES — scoped palette overrides + flourishes.
    Selected via <html data-theme="…"> (topnav <select> + localStorage).
    ==================================================================== */
-
-/* THEME: ocean  ≋  (sky / sea / beach — breezy blue) */
-[data-theme="ocean"] {
-  --cream:      #eef7fb;
-  --paper:      #ffffff;
-  --ink:        #2c4a55;
-  --ink-soft:   #7a96a1;
-  --pink:       #3aa3d8;
-  --pink-deep:  #1f7fb8;
-  --lavender:   #5ec6c0;
-  --lavender-d: #2a7fa0;
-  --mint:       #bfe9e3;
-  --lemon:      #fdeecb;
-  --line:       #c7e3ee;
-  --link:       #1f7fb8;
-  --link-visit: #5a9ab0;
-
-  --on-accent:    #fff;
-  --banner-grad:  linear-gradient(180deg, #8fd3f0 0%, #3aa3d8 55%, #1f7fb8 100%);
-  --soft-bg:      #f4f1e4;
-  --member-grad:  linear-gradient(180deg, #fff 0%, #f3f9e9 100%);
-  --menu-grad:    linear-gradient(90deg, #fff, #eef8fb);
-  --marquee-bg:   #fbf2d6;
-  --marquee-border:#ecd8a6;
-  --marquee-ink:  #94762f;
-  --wallpaper:    radial-gradient(circle at 50% 120%, rgba(94,198,192,.22) 0 2px, transparent 3px);
-  --wallpaper-size: 24px 14px;
-  --marker:       "≋";
-
-  --radius:     12px;
-  --radius-sm:  8px;
-  --shadow:     0 2px 0 rgba(58,163,216,.14), 0 8px 20px rgba(58,163,216,.16);
-}
-[data-theme="ocean"] .banner .site-name { text-shadow: 0 1px 0 rgba(31,127,184,.5); }
-[data-theme="ocean"] .entry .date-head::before { content: "≋ "; color: var(--lavender); }
-[data-theme="ocean"] .member { border-color: var(--lavender); }
 
 /* THEME: brilliant-green  ■  (clean & cool — white / emerald) */
 [data-theme="brilliant-green"] {
